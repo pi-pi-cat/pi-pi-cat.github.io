@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="回溯DFS算法12345&amp;#x27;&amp;#x27;&amp;#x27;算法模板&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;结束条件&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;递归前操作&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;开启递归&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;递归后操作-回溯&amp;">
+  <meta name="description" content="回溯DFS算法 12345&amp;#x27;&amp;#x27;&amp;#x27;算法模板&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;结束条件&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;递归前操作&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;开启递归&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;递归后操作-回溯">
 <meta property="og:type" content="article">
 <meta property="og:title" content="刷题心得">
 <meta property="og:url" content="http://example.com/2022/04/07/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/index.html">
 <meta property="og:site_name" content="皮皮猫">
-<meta property="og:description" content="回溯DFS算法12345&amp;#x27;&amp;#x27;&amp;#x27;算法模板&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;结束条件&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;递归前操作&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;开启递归&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;递归后操作-回溯&amp;">
+<meta property="og:description" content="回溯DFS算法 12345&amp;#x27;&amp;#x27;&amp;#x27;算法模板&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;结束条件&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;递归前操作&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;开启递归&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;&amp;#x27;递归后操作-回溯">
 <meta property="og:locale">
-<meta property="og:image" content="https://catbed.oss-cn-chengdu.aliyuncs.com/img/202204061055004.png">
 <meta property="article:published_time" content="2022-04-07T10:26:11.000Z">
 <meta property="article:modified_time" content="2022-04-08T02:08:31.482Z">
 <meta property="article:author" content="XiaoFeng Yue">
+<meta property="article:tag" content="二分查找">
 <meta property="article:tag" content="回溯">
 <meta property="article:tag" content="DFS">
 <meta property="article:tag" content="树">
@@ -38,9 +38,7 @@
 <meta property="article:tag" content="栈">
 <meta property="article:tag" content="队列">
 <meta property="article:tag" content="堆">
-<meta property="article:tag" content="二分查找">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://catbed.oss-cn-chengdu.aliyuncs.com/img/202204061055004.png">
 
 <link rel="canonical" href="http://example.com/2022/04/07/%E5%88%B7%E9%A2%98%E5%BF%83%E5%BE%97/">
 
@@ -223,136 +221,150 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="回溯DFS算法"><a href="#回溯DFS算法" class="headerlink" title="回溯DFS算法"></a>回溯DFS算法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;算法模板&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;结束条件&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;递归前操作&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;开启递归&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;递归后操作-回溯&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
+        <h2 id="回溯dfs算法">回溯DFS算法</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;算法模板&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;结束条件&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;递归前操作&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;开启递归&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;递归后操作-回溯&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
 <span id="more"></span>
 <ul>
-<li>如果需要记录路径dfs(path)参数中添加path<ul>
+<li>如果需要记录路径dfs(path)参数中添加path
+<ul>
 <li>注意Path是指针传递，如果结束需要弹出数据需要使用path.pop()</li>
 <li>注意Path进行拷贝时，应该使用<code>res.append(path[:])</code></li>
-</ul>
-</li>
-<li>如果是进行多个方向探索的&#x3D;&#x3D;存在性问题&#x3D;&#x3D; <ul>
-<li><ol>
-<li>进行方向性正确的判断 <code>return False</code> &#x3D;&#x3D;剪枝操作&#x3D;&#x3D;</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>是否需要标记路径已经来过</li>
-</ol>
-</li>
-<li><ol start="3">
-<li><code>return dfs(way_1) or dfs(way_2) or dfs(way_3)</code></li>
-</ol>
-</li>
-<li><ol start="4">
-<li>判断标记是否需要重置</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><ul>
-<li>如果是进行多个方向探索的&#x3D;&#x3D;值问题&#x3D;&#x3D; <ul>
-<li><ol>
-<li>进行方向性正确的判断 <code>return 0</code> &#x3D;&#x3D;剪枝操作&#x3D;&#x3D;</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>是否需要标记路径已经来过</li>
-</ol>
-</li>
-<li><ol start="3">
-<li><code>return 1 + dfs(way_1) + dfs(way_2) + dfs(way_3)</code></li>
-</ol>
-</li>
-<li><ol start="4">
-<li>判断标记是否需要重置</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>标记是否重置、取决于多个解决方案是否能够共用元素</li>
-<li>需要使用一些特殊的变量来参与(指针传递型),可以使用<code>self.xxx</code> 或者<code>list()</code></li>
-</ul>
-<h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><blockquote>
-<p>树的递归操作、注意递归前、递归后的回溯、返回值的确定、一定要画图</p>
-</blockquote>
+</ul></li>
+<li>如果是进行多个方向探索的==存在性问题==
 <ul>
-<li>树的前序遍历划分为<code>[ 根节点 | 左子树 | 右子树 ]</code></li>
-<li>树的中序遍历划分为<code>[ 左子树 | 根节点 | 右子树 ]</code></li>
-<li>前序遍历+中序遍历。后序遍历+中序遍历。都可以重建二叉树</li>
-<li>二叉搜索树的中序遍历就是一个递增数组</li>
-<li>二叉搜索树寻找最近公共祖先。&#x3D;&#x3D;思路&#x3D;&#x3D;p&amp;q在树的异侧才成立，在同侧时需要迭代或者递归找树的(left 或者 right)</li>
-<li>&#x3D;&#x3D;树寻找最近公共祖先&#x3D;&#x3D;<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lowestCommonAncestor</span>(<span class="params">self, root: TreeNode, p: TreeNode, q: TreeNode</span>) -&gt; TreeNode:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root <span class="keyword">or</span> root == p <span class="keyword">or</span> root == q: <span class="keyword">return</span> root</span><br><span class="line">        left = self.lowestCommonAncestor(root.left, p, q)</span><br><span class="line">        right = self.lowestCommonAncestor(root.right, p, q)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> left <span class="keyword">and</span> <span class="keyword">not</span> right: <span class="keyword">return</span> <span class="comment"># 1.</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> left: <span class="keyword">return</span> right <span class="comment"># 3.</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> right: <span class="keyword">return</span> left <span class="comment"># 4.</span></span><br><span class="line">        <span class="keyword">return</span> root <span class="comment"># 2. if left and right:</span></span><br></pre></td></tr></table></figure></li>
-<li>二叉搜索树进行双向链表的建立。使用中序遍历+<code>self.head\self.cur来记住前后</code></li>
-<li>树的前中后序遍历可以看代码之美里面的模板</li>
-<li>二叉搜索树的寻找第K个大的数字可以用 &#x3D;&#x3D;中序遍历的倒序 右根左&#x3D;&#x3D;</li>
-<li>判断平衡二叉树：树的深度和剪枝操作(后序遍历)<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">isBalanced</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">		<span class="keyword">def</span> <span class="title function_">recur</span>(<span class="params">root:TreeNode</span>):</span><br><span class="line">			<span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">			l, r = recur(root.left), recur(root.right)</span><br><span class="line">			<span class="keyword">if</span> l==-<span class="number">1</span> <span class="keyword">or</span> r == -<span class="number">1</span> <span class="keyword">or</span> <span class="built_in">abs</span>(l-r)&gt;<span class="number">1</span>: <span class="keyword">return</span> -<span class="number">1</span><span class="comment"># 剪枝操作</span></span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>+<span class="built_in">max</span>(l, r)		</span><br><span class="line">		<span class="keyword">return</span> recur(root)!=-<span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+<li><ol type="1">
+<li>进行方向性正确的判断 <code>return False</code> ==剪枝操作==</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>是否需要标记路径已经来过</li>
+</ol></li>
+<li><ol start="3" type="1">
+<li><code>return dfs(way_1) or dfs(way_2) or dfs(way_3)</code></li>
+</ol></li>
+<li><ol start="4" type="1">
+<li>判断标记是否需要重置</li>
+</ol></li>
+</ul></li>
+<li><ul>
+<li>如果是进行多个方向探索的==值问题==
+<ul>
+<li><ol type="1">
+<li>进行方向性正确的判断 <code>return 0</code> ==剪枝操作==</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>是否需要标记路径已经来过</li>
+</ol></li>
+<li><ol start="3" type="1">
+<li><code>return 1 + dfs(way_1) + dfs(way_2) + dfs(way_3)</code></li>
+</ol></li>
+<li><ol start="4" type="1">
+<li>判断标记是否需要重置</li>
+</ol></li>
+</ul></li>
+</ul></li>
+<li>标记是否重置、取决于多个解决方案是否能够共用元素</li>
+<li>需要使用一些特殊的变量来参与(指针传递型),可以使用<code>self.xxx</code>
+或者<code>list()</code></li>
 </ul>
-<h3 id="算法思想"><a href="#算法思想" class="headerlink" title="算法思想"></a>算法思想</h3><ul>
-<li>一个数组把他们拼接成一个最小数问题 。  <code>x+y &lt; y+x</code> 就可以保证小的在前面</li>
-<li>&#x3D;&#x3D;双顶堆对冲&#x3D;&#x3D;。就是一个正数的小顶堆<code>A</code>  一个转换成负数变成大顶堆<code>B</code>(实际也是小顶堆)，添加进A堆时候得先添加进B堆，反之同样操作<code>heapq.heappush(self.B, -num) heapq.heappush(self.A, -heapq.heappop(self.B))</code></li>
-<li>&#x3D;&#x3D;快速幂思想&#x3D;&#x3D; $x^{n}&#x3D;x^{1 b_{1}+2 b_{2}+4 b_{3}+\ldots+2^{m-1} b_{m}}&#x3D;x^{1 b_{1}} x^{2 b_{2}} x^{4 b_{3}} \ldots x^{2^{m-1}} b_{m}$</li>
+<h3 id="树">树</h3>
+<blockquote>
+<p>树的递归操作、注意递归前、递归后的回溯、返回值的确定、一定要画图 -
+树的前序遍历划分为<code>[ 根节点 | 左子树 | 右子树 ]</code> -
+树的中序遍历划分为<code>[ 左子树 | 根节点 | 右子树 ]</code> -
+前序遍历+中序遍历。后序遍历+中序遍历。都可以重建二叉树 -
+二叉搜索树的中序遍历就是一个递增数组 -
+二叉搜索树寻找最近公共祖先。==思路==p&amp;q在树的异侧才成立，在同侧时需要迭代或者递归找树的(left
+或者 right) - ==树寻找最近公共祖先== <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lowestCommonAncestor</span>(<span class="params">self, root: TreeNode, p: TreeNode, q: TreeNode</span>) -&gt; TreeNode:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root <span class="keyword">or</span> root == p <span class="keyword">or</span> root == q: <span class="keyword">return</span> root</span><br><span class="line">        left = self.lowestCommonAncestor(root.left, p, q)</span><br><span class="line">        right = self.lowestCommonAncestor(root.right, p, q)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> left <span class="keyword">and</span> <span class="keyword">not</span> right: <span class="keyword">return</span> <span class="comment"># 1.</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> left: <span class="keyword">return</span> right <span class="comment"># 3.</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> right: <span class="keyword">return</span> left <span class="comment"># 4.</span></span><br><span class="line">        <span class="keyword">return</span> root <span class="comment"># 2. if left and right:</span></span><br></pre></td></tr></table></figure> -
+二叉搜索树进行双向链表的建立。使用中序遍历+<code>self.head\self.cur来记住前后</code>
+- 树的前中后序遍历可以看代码之美里面的模板 -
+二叉搜索树的寻找第K个大的数字可以用 ==中序遍历的倒序 右根左== -
+判断平衡二叉树：树的深度和剪枝操作(后序遍历) <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">isBalanced</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">		<span class="keyword">def</span> <span class="title function_">recur</span>(<span class="params">root:TreeNode</span>):</span><br><span class="line">			<span class="keyword">if</span> <span class="keyword">not</span> root: <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">			l, r = recur(root.left), recur(root.right)</span><br><span class="line">			<span class="keyword">if</span> l==-<span class="number">1</span> <span class="keyword">or</span> r == -<span class="number">1</span> <span class="keyword">or</span> <span class="built_in">abs</span>(l-r)&gt;<span class="number">1</span>: <span class="keyword">return</span> -<span class="number">1</span><span class="comment"># 剪枝操作</span></span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>+<span class="built_in">max</span>(l, r)		</span><br><span class="line">		<span class="keyword">return</span> recur(root)!=-<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="算法思想">算法思想</h3>
+<ul>
+<li>一个数组把他们拼接成一个最小数问题 。 <code>x+y &lt; y+x</code>
+就可以保证小的在前面</li>
+<li>==双顶堆对冲==。就是一个正数的小顶堆<code>A</code>
+一个转换成负数变成大顶堆<code>B</code>(实际也是小顶堆)，添加进A堆时候得先添加进B堆，反之同样操作<code>heapq.heappush(self.B, -num) heapq.heappush(self.A, -heapq.heappop(self.B))</code></li>
+<li>==快速幂思想== <span class="math inline">\(x^{n}=x^{1 b_{1}+2
+b_{2}+4 b_{3}+\ldots+2^{m-1} b_{m}}=x^{1 b_{1}} x^{2 b_{2}} x^{4 b_{3}}
+\ldots x^{2^{m-1}} b_{m}\)</span></li>
 <li>求一个数组中存在两个不同数字时、其他数字都是成双出现的时候，可以使用异或的方法。但是前提是首先需要得到两个子数组，子数组也可以通过异或来算出。</li>
-<li>一个数组中出现了n次数字、某个数字出现了1次。可以根据真值表推出逻辑表达式&#x3D;&#x3D;位运算&#x3D;&#x3D;,&#x3D;&#x3D;有限状态机的转换&#x3D;&#x3D;,&#x3D;&#x3D;为了减少变量的使用、某些变量需要即使更新&#x3D;&#x3D;</li>
-<li>&#x3D;&#x3D;摩尔投票法&#x3D;&#x3D; 数组中出现超过一半的数字。</li>
+<li>一个数组中出现了n次数字、某个数字出现了1次。可以根据真值表推出逻辑表达式==位运算==,==有限状态机的转换==,==为了减少变量的使用、某些变量需要即使更新==</li>
+<li>==摩尔投票法== 数组中出现超过一半的数字。</li>
 <li>剪绳子算法，最优解长度分别是3-2-1</li>
 </ul>
-<h2 id="Python用法"><a href="#Python用法" class="headerlink" title="Python用法"></a>Python用法</h2><ul>
-<li>&#x3D;&#x3D;自定义排序比较&#x3D;&#x3D;<code>functools.cmp_to_key(lambda x,y:x-y)</code>  如果值小于0就交换位置，如果值大于0则不变</li>
-<li>放入<code>heapq.heappush(list,num)</code> 推出<code>heapq.heappop(list)</code></li>
-<li>在<code>剪枝或者提前终止递归</code>时可以用 <code>and or</code>。<ul>
+<h2 id="python用法">Python用法</h2>
+<ul>
+<li>==自定义排序比较==<code>functools.cmp_to_key(lambda x,y:x-y)</code>
+如果值小于0就交换位置，如果值大于0则不变</li>
+<li>放入<code>heapq.heappush(list,num)</code>
+推出<code>heapq.heappop(list)</code></li>
+<li>在<code>剪枝或者提前终止递归</code>时可以用 <code>and or</code>。
+<ul>
 <li><code>if(A &amp;&amp; B) // 若 A 为 false ，则 B 的判断不会执行（即短路），直接判定 A &amp;&amp; B 为 false</code></li>
 <li><code>if(A || B) // 若 A 为 true ，则 B 的判断不会执行（即短路），直接判定 A || B 为 true</code></li>
 <li><code>python的 and 操作如果最后结果为真，返回最后一个表达式的值，or 操作如果结果为真，返回第一个结果为真的表达式的值</code></li>
-</ul>
-</li>
-<li>&#x3D;&#x3D;移位操作&#x3D;&#x3D;<ul>
-<li><strong>n&amp;1 （与操作）：</strong> 判断 nn 二进制最右一位是否为 1 ；</li>
-<li><strong>n&gt;&gt;&#x3D;1 （移位操作）：</strong> nn 右移一位（可理解为删除最后一位）。</li>
-<li><code> n&amp;=n-1</code> 可以把n的最右边1去掉。&#x3D;&#x3D;用来计算二进制中1的个数&#x3D;&#x3D;</li>
+</ul></li>
+<li>==移位操作==
+<ul>
+<li><strong>n&amp;1 （与操作）：</strong> 判断 nn 二进制最右一位是否为 1
+；</li>
+<li><strong>n&gt;&gt;=1 （移位操作）：</strong> nn
+右移一位（可理解为删除最后一位）。</li>
+<li><code>n&amp;=n-1</code>
+可以把n的最右边1去掉。==用来计算二进制中1的个数==</li>
 <li><code>~</code>将整个数字取反。<code>^</code>异或操作</li>
-<li>&#x3D;&#x3D;Python整数无长度、为了生成负数的补码，我们需要把她们变成32位长度&#x3D;&#x3D; <code>a&amp;0xffffffff</code> 并且最终的结果我们需要还原补码<code>return a if a &lt;= 0x7fffffff else ~(a ^ x)</code></li>
-<li><code>0xffffffff</code>是32位 <code>0x7fffffff</code>是最大的32位整数</li>
+<li>==Python整数无长度、为了生成负数的补码，我们需要把她们变成32位长度==
+<code>a&amp;0xffffffff</code>
+并且最终的结果我们需要还原补码<code>return a if a &lt;= 0x7fffffff else ~(a ^ x)</code></li>
+<li><code>0xffffffff</code>是32位
+<code>0x7fffffff</code>是最大的32位整数</li>
+</ul></li>
+<li><code>%(1e9+7) 和 %1000000007</code>==结果不一样==啊</li>
 </ul>
-</li>
-<li><code>%(1e9+7) 和 %1000000007</code>&#x3D;&#x3D;结果不一样&#x3D;&#x3D;啊</li>
-</ul>
-<h2 id="队列-amp-栈-amp-堆"><a href="#队列-amp-栈-amp-堆" class="headerlink" title="队列&amp;栈&amp;堆"></a>队列&amp;栈&amp;堆</h2><ul>
-<li>寻找中位数：&#x3D;&#x3D;双顶堆对冲&#x3D;&#x3D;。就是一个正数的小顶堆<code>A</code>  一个转换成负数变成大顶堆<code>B</code>(实际也是小顶堆)，添加进A堆时候得先添加进B堆，反之同样操作<code>heapq.heappush(self.B, -num) heapq.heappush(self.A, -heapq.heappop(self.B))</code></li>
+<h2 id="队列栈堆">队列&amp;栈&amp;堆</h2>
+<ul>
+<li>寻找中位数：==双顶堆对冲==。就是一个正数的小顶堆<code>A</code>
+一个转换成负数变成大顶堆<code>B</code>(实际也是小顶堆)，添加进A堆时候得先添加进B堆，反之同样操作<code>heapq.heappush(self.B, -num) heapq.heappush(self.A, -heapq.heappop(self.B))</code></li>
 <li>寻找窗口的最大值：双端队列，队列保持住右侧新加入的最大值，并把队列中小于次数的值删除</li>
 <li>包含min函数的栈：辅助栈来存放最小值</li>
-<li>单调栈：维护一个递增或者递减的序列。作用是可以确定两边的边界<ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/solution/trapping-rain-water-by-ikaruga/">接雨水</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">算最大矩形面积</a></li>
-<li><h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2></li>
-</ul>
-</li>
-<li>环形链表：判断是否有环<ul>
-<li>使用&#x3D;&#x3D;快慢指针&#x3D;&#x3D;</li>
-<li>使用哈希表&#x3D;&#x3D;set\dict 都属于哈希表&#x3D;&#x3D;</li>
-</ul>
-</li>
+<li>单调栈：维护一个递增或者递减的序列。作用是可以确定两边的边界
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/solution/trapping-rain-water-by-ikaruga/">接雨水</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">算最大矩形面积</a></li>
+<li><h2 id="链表">链表</h2></li>
+</ul></li>
+<li>环形链表：判断是否有环
+<ul>
+<li>使用==快慢指针==</li>
+<li>使用哈希表==set都属于哈希表==</li>
+</ul></li>
 <li>使用虚拟头结点<code>dummy.next = head</code></li>
-<li>头插法&#x3D;&#x3D;(注意要保留哪两个节点)&#x3D;&#x3D;<ul>
+<li>头插法==(注意要保留哪两个节点)==
+<ul>
 <li>一个<code>node</code>停留在需要被插入的起点</li>
 <li>一个<code>node</code>一直向后走</li>
-<li><img src="https://catbed.oss-cn-chengdu.aliyuncs.com/img/202204061055004.png" alt="202204061055004|400"></li>
+<li><img
+src="https://catbed.oss-cn-chengdu.aliyuncs.com/img/202204061055004.png"
+title="fig:" alt="202204061055004|400" /></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><ul>
-<li>比较没思路的时候使用左闭右开的标准模板。注意<ul>
-<li><code>&lt; | &lt;=</code>的选择 <code>&lt;</code>直接选择的第一个等于的元素 <code>&lt;=</code>选择的第一个大于目标值的元素<ul>
+<h2 id="二分查找">二分查找</h2>
+<ul>
+<li>比较没思路的时候使用左闭右开的标准模板。注意
+<ul>
+<li><code>&lt; | &lt;=</code>的选择
+<code>&lt;</code>直接选择的第一个等于的元素
+<code>&lt;=</code>选择的第一个大于目标值的元素
+<ul>
 <li>-1可以得到第一个小于的，和最后一个等于的</li>
-</ul>
-</li>
+</ul></li>
 <li><code>mid = left + (right - left )// 2</code> 这个计算中间值</li>
-<li><code>while left &lt; right </code> 用此来判定循环终止</li>
-</ul>
-</li>
+<li><code>while left &lt; right</code> 用此来判定循环终止</li>
+</ul></li>
 </ul>
 
     </div>
@@ -363,6 +375,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag"># 二分查找</a>
               <a href="/tags/%E5%9B%9E%E6%BA%AF/" rel="tag"># 回溯</a>
               <a href="/tags/DFS/" rel="tag"># DFS</a>
               <a href="/tags/%E6%A0%91/" rel="tag"># 树</a>
@@ -370,7 +383,6 @@
               <a href="/tags/%E6%A0%88/" rel="tag"># 栈</a>
               <a href="/tags/%E9%98%9F%E5%88%97/" rel="tag"># 队列</a>
               <a href="/tags/%E5%A0%86/" rel="tag"># 堆</a>
-              <a href="/tags/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="tag"># 二分查找</a>
           </div>
 
         
@@ -444,7 +456,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AFDFS%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">回溯DFS算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91"><span class="nav-number">1.1.</span> <span class="nav-text">树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="nav-number">1.2.</span> <span class="nav-text">算法思想</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">Python用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%9F%E5%88%97-amp-%E6%A0%88-amp-%E5%A0%86"><span class="nav-number">3.</span> <span class="nav-text">队列&amp;栈&amp;堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">5.</span> <span class="nav-text">二分查找</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9E%E6%BA%AFdfs%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">回溯DFS算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91"><span class="nav-number">1.1.</span> <span class="nav-text">树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%80%9D%E6%83%B3"><span class="nav-number">1.2.</span> <span class="nav-text">算法思想</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">Python用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%9F%E5%88%97%E6%A0%88%E5%A0%86"><span class="nav-number">3.</span> <span class="nav-text">队列&amp;栈&amp;堆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-number">5.</span> <span class="nav-text">二分查找</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -555,6 +567,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

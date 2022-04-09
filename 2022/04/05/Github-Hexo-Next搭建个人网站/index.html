@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Git配置路径">
+  <meta name="description" content="Git配置 路径">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Github+Hexo+Next搭建个人网站">
 <meta property="og:url" content="http://example.com/2022/04/05/Github-Hexo-Next%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/index.html">
 <meta property="og:site_name" content="皮皮猫">
-<meta property="og:description" content="Git配置路径">
+<meta property="og:description" content="Git配置 路径">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-04-05T05:49:19.000Z">
 <meta property="article:modified_time" content="2022-04-08T13:55:27.479Z">
@@ -214,55 +214,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Git配置"><a href="#Git配置" class="headerlink" title="Git配置"></a>Git配置</h1><h2 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h2><span id="more"></span>
-
+        <h1 id="git配置">Git配置</h1>
+<h2 id="路径">路径</h2>
+<span id="more"></span>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$: vim ~/.gitconfig 配置git</span><br><span class="line"></span><br><span class="line">[core]</span><br><span class="line">        excludesfile = /Users/yxf/.gitignore_global</span><br><span class="line">[difftool <span class="string">&quot;sourcetree&quot;</span>]</span><br><span class="line">        cmd = opendiff \&quot;<span class="variable">$LOCAL</span>\&quot; \&quot;<span class="variable">$REMOTE</span>\&quot;</span><br><span class="line">        path =</span><br><span class="line">[mergetool <span class="string">&quot;sourcetree&quot;</span>]</span><br><span class="line">        cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \&quot;<span class="variable">$LOCAL</span>\&quot; \&quot;<span class="variable">$REMOTE</span>\&quot; -ancestor \&quot;<span class="variable">$BASE</span>\&quot; -merge \&quot;<span class="variable">$MERGED</span>\&quot;</span><br><span class="line">        trustExitCode = <span class="literal">true</span></span><br><span class="line">[user]</span><br><span class="line">        name = <span class="string">&quot;Username&quot;</span></span><br><span class="line">        email = <span class="string">&quot;email&quot;</span></span><br><span class="line">[commit]</span><br><span class="line">        template = /Users/yxf/.stCommitMsg</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="配置github以及SSH"><a href="#配置github以及SSH" class="headerlink" title="配置github以及SSH"></a>配置github以及SSH</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的GitHub用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的GitHub注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-
-
-<p>&#x3D;&#x3D;生成ssh密钥文件&#x3D;&#x3D;</p>
-<blockquote>
-<p>通过非对称加密的公钥与私钥来完成加密，公钥放置在GitHub上，私钥放置在自己的电脑里。GitHub要求每次推送代码都是合法用户，所以每次推送都需要输入账号密码验证推送用户是否是合法用户，为了省去每次输入密码的步骤，采用了ssh，当你推送的时候，git就会匹配你的私钥跟GitHub上面的公钥是否是配对的，若是匹配就认为你是合法用户，则允许推送。这样可以保证每次的推送都是正确合法的。</p>
-</blockquote>
+<h2 id="配置github以及ssh">配置github以及SSH</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的GitHub用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的GitHub注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<p>==生成ssh密钥文件== &gt;
+通过非对称加密的公钥与私钥来完成加密，公钥放置在GitHub上，私钥放置在自己的电脑里。GitHub要求每次推送代码都是合法用户，所以每次推送都需要输入账号密码验证推送用户是否是合法用户，为了省去每次输入密码的步骤，采用了ssh，当你推送的时候，git就会匹配你的私钥跟GitHub上面的公钥是否是配对的，若是匹配就认为你是合法用户，则允许推送。这样可以保证每次的推送都是正确合法的。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你的GitHub注册邮箱&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>&#x3D;&#x3D;上传公钥到github&#x3D;&#x3D;<br>在路径<code>~/ssh/</code>下会生成<code>id_rsa</code> 、<code>id_rsa.pub</code> 把公钥上传到<code>github</code>的<code>ssh key</code>中<br>&#x3D;&#x3D;测试连接&#x3D;&#x3D;</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh git@github.com</span><br></pre></td></tr></table></figure>
-
-<h1 id="HEXO和NEXT"><a href="#HEXO和NEXT" class="headerlink" title="HEXO和NEXT"></a>HEXO和NEXT</h1><h2 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h2><table>
+<p>==上传公钥到github==
+在路径<code>~/ssh/</code>下会生成<code>id_rsa</code>
+、<code>id_rsa.pub</code>
+把公钥上传到<code>github</code>的<code>ssh key</code>中 ==测试连接==
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh git@github.com</span><br></pre></td></tr></table></figure></p>
+<h1 id="hexo和next">HEXO和NEXT</h1>
+<h2 id="前期准备">前期准备</h2>
+<table>
 <thead>
-<tr>
+<tr class="header">
 <th>software</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>npm</td>
 </tr>
-<tr>
+<tr class="even">
 <td>node</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>brew(可选)</td>
 </tr>
-</tbody></table>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install hexo  <span class="comment"># 失效</span></span><br><span class="line">npm install -g hexo-cli <span class="comment"># 有效</span></span><br></pre></td></tr></table></figure>
+</tbody>
+</table>
+<h2 id="安装">安装</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew install hexo  <span class="comment"># 失效</span></span><br><span class="line">npm install -g hexo-cli <span class="comment"># 有效</span></span><br></pre></td></tr></table></figure>
+<h2 id="创建blog">创建blog</h2>
+<p><code>hexo init blog</code></p>
+<h2 id="本地运行server">本地运行server</h2>
+<p><code>hexo server</code></p>
+<h2 id="常见命令">常见命令</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">&quot;Hello Hexo&quot;</span></span><br><span class="line">hexo generate</span><br><span class="line">hexo n <span class="string">&quot;我的博客&quot;</span> == hexo new <span class="string">&quot;我的博客&quot;</span> <span class="comment">#新建文章  </span></span><br><span class="line">hexo g == hexo generate <span class="comment">#生成  </span></span><br><span class="line">hexo s == hexo server <span class="comment">#启动服务预览  </span></span><br><span class="line">hexo d == hexo deploy <span class="comment">#部署  </span></span><br><span class="line">  </span><br><span class="line">hexo server <span class="comment">#Hexo会监视文件变动并自动更新，无须重启服务器  </span></span><br><span class="line">hexo server -s <span class="comment">#静态模式  </span></span><br><span class="line">hexo server -p 5000 <span class="comment">#更改端口  </span></span><br><span class="line">hexo server -i 192.168.1.1 <span class="comment">#自定义 IP  </span></span><br><span class="line">hexo clean <span class="comment">#清除缓存，若是网页正常情况下可以忽略这条命令</span></span><br><span class="line">npm install hexo -g <span class="comment">#安装Hexo  </span></span><br><span class="line">npm update hexo -g <span class="comment">#升级   </span></span><br><span class="line">hexo init <span class="comment">#初始化博客</span></span><br></pre></td></tr></table></figure>
+<h2 id="下载安装next主题">下载安装next主题</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+<p><code>_config.yml配置theme</code> 1. 设置主题 2. 关联hexo和github
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="comment"># 配置主题</span></span><br><span class="line">theme: next</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="comment"># 配置github和hexo关联</span></span><br><span class="line">deploy:</span><br><span class="line"></span><br><span class="line"><span class="built_in">type</span>: git</span><br><span class="line"></span><br><span class="line">repo: https://$token<span class="variable">$@github</span>.com/pi-pi-cat/pi-pi-cat.github.io.git</span><br><span class="line"></span><br><span class="line">branch: main</span><br></pre></td></tr></table></figure></p>
+<p>==error~ 因为密码认证已经废除、现在使用的是token <a
+target="_blank" rel="noopener" href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">查看详情</a>==</p>
+<p>==生成Personal Token 并且添加到_config.yml==
+<code>https://tokrn@github.com/pi-pi-cat/pipicat.github.io.git</code></p>
+<h1 id="使用三板斧">使用三板斧</h1>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo new <span class="string">&quot;新闻的帐&quot;</span> <span class="comment"># 新建文章 文章在source/_posts/**.md中</span></span><br><span class="line">hexo g     <span class="comment"># 生成静态文件</span></span><br><span class="line">hexo d             <span class="comment"># 编写完之后进行部署</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="创建blog"><a href="#创建blog" class="headerlink" title="创建blog"></a>创建blog</h2><p><code>hexo init blog</code></p>
-<h2 id="本地运行server"><a href="#本地运行server" class="headerlink" title="本地运行server"></a>本地运行server</h2><p><code> hexo server</code></p>
-<h2 id="常见命令"><a href="#常见命令" class="headerlink" title="常见命令"></a>常见命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">&quot;Hello Hexo&quot;</span></span><br><span class="line">hexo generate</span><br><span class="line">hexo n <span class="string">&quot;我的博客&quot;</span> == hexo new <span class="string">&quot;我的博客&quot;</span> <span class="comment">#新建文章  </span></span><br><span class="line">hexo g == hexo generate <span class="comment">#生成  </span></span><br><span class="line">hexo s == hexo server <span class="comment">#启动服务预览  </span></span><br><span class="line">hexo d == hexo deploy <span class="comment">#部署  </span></span><br><span class="line">  </span><br><span class="line">hexo server <span class="comment">#Hexo会监视文件变动并自动更新，无须重启服务器  </span></span><br><span class="line">hexo server -s <span class="comment">#静态模式  </span></span><br><span class="line">hexo server -p 5000 <span class="comment">#更改端口  </span></span><br><span class="line">hexo server -i 192.168.1.1 <span class="comment">#自定义 IP  </span></span><br><span class="line">hexo clean <span class="comment">#清除缓存，若是网页正常情况下可以忽略这条命令</span></span><br><span class="line">npm install hexo -g <span class="comment">#安装Hexo  </span></span><br><span class="line">npm update hexo -g <span class="comment">#升级   </span></span><br><span class="line">hexo init <span class="comment">#初始化博客</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="下载安装next主题"><a href="#下载安装next主题" class="headerlink" title="下载安装next主题"></a>下载安装next主题</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/theme-next/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
-
-<p><code>_config.yml配置theme</code></p>
-<ol>
-<li>设置主题</li>
-<li>关联hexo和github<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="comment"># 配置主题</span></span><br><span class="line">theme: next</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="comment"># 配置github和hexo关联</span></span><br><span class="line">deploy:</span><br><span class="line"></span><br><span class="line"><span class="built_in">type</span>: git</span><br><span class="line"></span><br><span class="line">repo: https://$token<span class="variable">$@github</span>.com/pi-pi-cat/pi-pi-cat.github.io.git</span><br><span class="line"></span><br><span class="line">branch: main</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>&#x3D;&#x3D;error~ 因为密码认证已经废除、现在使用的是token <a target="_blank" rel="noopener" href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">查看详情</a>&#x3D;&#x3D;</p>
-<p>&#x3D;&#x3D;生成Personal Token 并且添加到_config.yml&#x3D;&#x3D;<br><code>https://tokrn@github.com/pi-pi-cat/pipicat.github.io.git</code></p>
-<h1 id="使用三板斧"><a href="#使用三板斧" class="headerlink" title="使用三板斧"></a>使用三板斧</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo new <span class="string">&quot;新闻的帐&quot;</span> <span class="comment"># 新建文章 文章在source/_posts/**.md中</span></span><br><span class="line">hexo g     <span class="comment"># 生成静态文件</span></span><br><span class="line">hexo d             <span class="comment"># 编写完之后进行部署</span></span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -345,7 +349,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">Git配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84"><span class="nav-number">1.1.</span> <span class="nav-text">路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEgithub%E4%BB%A5%E5%8F%8ASSH"><span class="nav-number">1.2.</span> <span class="nav-text">配置github以及SSH</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HEXO%E5%92%8CNEXT"><span class="nav-number">2.</span> <span class="nav-text">HEXO和NEXT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAblog"><span class="nav-number">2.3.</span> <span class="nav-text">创建blog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8Cserver"><span class="nav-number">2.4.</span> <span class="nav-text">本地运行server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="nav-number">2.5.</span> <span class="nav-text">常见命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85next%E4%B8%BB%E9%A2%98"><span class="nav-number">2.6.</span> <span class="nav-text">下载安装next主题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%89%E6%9D%BF%E6%96%A7"><span class="nav-number">3.</span> <span class="nav-text">使用三板斧</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">Git配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84"><span class="nav-number">1.1.</span> <span class="nav-text">路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEgithub%E4%BB%A5%E5%8F%8Assh"><span class="nav-number">1.2.</span> <span class="nav-text">配置github以及SSH</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo%E5%92%8Cnext"><span class="nav-number">2.</span> <span class="nav-text">HEXO和NEXT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAblog"><span class="nav-number">2.3.</span> <span class="nav-text">创建blog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8Cserver"><span class="nav-number">2.4.</span> <span class="nav-text">本地运行server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="nav-number">2.5.</span> <span class="nav-text">常见命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85next%E4%B8%BB%E9%A2%98"><span class="nav-number">2.6.</span> <span class="nav-text">下载安装next主题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%B8%89%E6%9D%BF%E6%96%A7"><span class="nav-number">3.</span> <span class="nav-text">使用三板斧</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -456,6 +460,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

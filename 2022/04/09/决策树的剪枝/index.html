@@ -20,21 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="决策树的剪枝原因：复杂的决策树，这样产生的决策树往往对训练数据的分类很准确，却对未知的测试数据的分类没有那么准确，即出现过拟合现象。">
+  <meta name="description" content="决策树的剪枝 原因：复杂的决策树，这样产生的决策树往往对训练数据的分类很准确，却对未知的测试数据的分类没有那么准确，即出现过拟合现象。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="决策树的剪枝">
 <meta property="og:url" content="http://example.com/2022/04/09/%E5%86%B3%E7%AD%96%E6%A0%91%E7%9A%84%E5%89%AA%E6%9E%9D/index.html">
 <meta property="og:site_name" content="皮皮猫">
-<meta property="og:description" content="决策树的剪枝原因：复杂的决策树，这样产生的决策树往往对训练数据的分类很准确，却对未知的测试数据的分类没有那么准确，即出现过拟合现象。">
+<meta property="og:description" content="决策树的剪枝 原因：复杂的决策树，这样产生的决策树往往对训练数据的分类很准确，却对未知的测试数据的分类没有那么准确，即出现过拟合现象。">
 <meta property="og:locale">
-<meta property="og:image" content="https://catbed.oss-cn-chengdu.aliyuncs.com/img/202204092045875.png">
 <meta property="article:published_time" content="2022-04-09T12:47:29.000Z">
 <meta property="article:modified_time" content="2022-04-09T12:48:28.018Z">
 <meta property="article:author" content="XiaoFeng Yue">
 <meta property="article:tag" content="决策树">
 <meta property="article:tag" content="剪枝">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://catbed.oss-cn-chengdu.aliyuncs.com/img/202204092045875.png">
 
 <link rel="canonical" href="http://example.com/2022/04/09/%E5%86%B3%E7%AD%96%E6%A0%91%E7%9A%84%E5%89%AA%E6%9E%9D/">
 
@@ -215,64 +213,106 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="决策树的剪枝"><a href="#决策树的剪枝" class="headerlink" title="决策树的剪枝"></a>决策树的剪枝</h2><p>原因：复杂的决策树，这样产生的决策树往往对训练数据的分类很准确，却对未知的测试数据的分类没有那么准确，即出现<strong>过拟合现象</strong>。</p>
+        <h2 id="决策树的剪枝">决策树的剪枝</h2>
+<p>原因：复杂的决策树，这样产生的决策树往往对训练数据的分类很准确，却对未知的测试数据的分类没有那么准确，即出现<strong>过拟合现象</strong>。
 <span id="more"></span>
-<p>我们需要对已生成的决策树进行简化，这个简化的过程我们称之为<strong>剪枝(pruning)。</strong></p>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>决策树的剪枝往往通过<strong>极小化</strong>决策树整体的**损失函数(loss funtion)<strong>或</strong>代价函数(cost funtion)**来实现。</p>
+我们需要对已生成的决策树进行简化，这个简化的过程我们称之为<strong>剪枝(pruning)。</strong></p>
+<h3 id="方法">方法</h3>
+<p>决策树的剪枝往往通过<strong>极小化</strong>决策树整体的<strong>损失函数(loss
+funtion)</strong>或<strong>代价函数(cost funtion)</strong>来实现。</p>
 <p>建立模型：</p>
 <table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 49%" />
+<col style="width: 40%" />
+</colgroup>
 <thead>
-<tr>
+<tr class="header">
 <th>符号</th>
 <th>公式</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>$|T|$</td>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\|T\|\)</span></td>
 <td></td>
 <td>树T的叶子节点数：分类结果的总数</td>
 </tr>
-<tr>
-<td>$t$</td>
+<tr class="even">
+<td><span class="math inline">\(t\)</span></td>
 <td></td>
 <td>某个<strong>叶节点</strong></td>
 </tr>
-<tr>
-<td>$N_t$</td>
+<tr class="odd">
+<td><span class="math inline">\(N_t\)</span></td>
 <td></td>
-<td>叶节点$t$拥有的<strong>样本数</strong></td>
+<td>叶节点<span
+class="math inline">\(t\)</span>拥有的<strong>样本数</strong></td>
 </tr>
-<tr>
-<td>$N_{tk}$</td>
-<td>$k&#x3D;1,2,…,k$</td>
-<td>叶节点$t$拥有的<strong>样本数</strong>可以分为$k$类、每类的<strong>样本数</strong></td>
+<tr class="even">
+<td><span class="math inline">\(N_{tk}\)</span></td>
+<td><span class="math inline">\(k=1,2,...,k\)</span></td>
+<td>叶节点<span
+class="math inline">\(t\)</span>拥有的<strong>样本数</strong>可以分为<span
+class="math inline">\(k\)</span>类、每类的<strong>样本数</strong></td>
 </tr>
-<tr>
-<td>$H_t(T)$</td>
-<td>$H_{t}(T)&#x3D;-\sum_{k} \frac{N_{t k}}{N_{t}} \log \frac{N_{t k}}{N_{t}}$</td>
-<td>树T叶节点$t$的信息熵</td>
+<tr class="odd">
+<td><span class="math inline">\(H_t(T)\)</span></td>
+<td><span class="math inline">\(H_{t}(T)=-\sum_{k} \frac{N_{t k}}{N_{t}}
+\log \frac{N_{t k}}{N_{t}}\)</span></td>
+<td>树T叶节点<span class="math inline">\(t\)</span>的信息熵</td>
 </tr>
-<tr>
-<td>$\alpha$</td>
+<tr class="even">
+<td><span class="math inline">\(\alpha\)</span></td>
 <td></td>
 <td>权衡因子</td>
 </tr>
-<tr>
-<td>$C_{\alpha}(T)$</td>
-<td>$C_{\alpha}(T)&#x3D;\sum_{t&#x3D;1}^{|T|} N_{t} H_{t}(T)+\alpha|T|$</td>
+<tr class="odd">
+<td><span class="math inline">\(C_{\alpha}(T)\)</span></td>
+<td><span class="math inline">\(C_{\alpha}(T)=\sum_{t=1}^{\|T\|} N_{t}
+H_{t}(T)+\alpha\|T\|\)</span></td>
 <td>决策树的损失函数</td>
 </tr>
-</tbody></table>
-<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>主要解释损失函数的含义<br>$C_{\alpha}(T)&#x3D;\sum_{t&#x3D;1}^{|T|} N_{t} H_{t}(T)+\alpha|T|$</p>
-<h4 id="C-T"><a href="#C-T" class="headerlink" title="$C(T)$"></a>$C(T)$</h4><p>通常把第一项用<code>C(T)</code>表示来简化、表达式变成$C_{\alpha}(T) &#x3D; C(T) + \alpha|T|$<br>$C(T) &#x3D; \sum_{t&#x3D;1}^{|T|} N_{t} H_{t}(T)$<br>含义：树中所有叶子节点的信息熵之和。表示模型对训练数据的<strong>预测误差</strong>，即模型与训练数据的<strong>拟合程度</strong></p>
-<h4 id="alpha-T"><a href="#alpha-T" class="headerlink" title="$\alpha|T|$"></a>$\alpha|T|$</h4><p>含义：$|T|$表示模型的复杂度(节点越多当然越复杂)。从公式$C(T) &#x3D; \sum_{t&#x3D;1}^{|T|} N_{t} H_{t}(T)$中可以看出来，一个树的叶结点越多，即模型越复杂， $C(T)$ 就越小。极端情况如每一个实例样本点都对应一个叶结点，我们知道此时一般是过拟合的，此时模型对训练数据完全正确分类， $C(T)&#x3D;0$ ；相反如果叶结点较少，即模型较为简单时， $C(T)$就越大。极端情况如只有一个叶结点，这个叶结点包含了所有的实例样本点，此时 $\frac{N_{tk}}{N_t}$ 相对较小(可能远小于1，接近于0)， $log{\frac{N_{tk}}{N_t}}$ 就非常大。所以就有了一个<strong>平衡机制</strong>在里面<br><strong>通过$\alpha$来影响权衡$C(T)和|T|$的关系</strong></p>
-<h3 id="剪枝算法"><a href="#剪枝算法" class="headerlink" title="剪枝算法"></a>剪枝算法</h3><p>输入：生成算法产生的整个树T，参数 $\alpha$<br>输出：修剪后的子树$T_{\alpha}$</p>
-<ol>
-<li>计算<strong>每个结点的经验熵</strong>。</li>
-<li>递归地从树的叶结点向上回缩。<br> $C_{\alpha}(T_{\text{修剪后}}) \le C_{\alpha}(T_{\text{修剪前}})$ 则进行剪枝</li>
-<li>返回2，直至不能继续为止，得到损失函数最小的子树$T_{\alpha}$<br><img src="https://catbed.oss-cn-chengdu.aliyuncs.com/img/202204092045875.png" alt="202204092045875|400"></li>
-</ol>
+</tbody>
+</table>
+<h3 id="损失函数">损失函数</h3>
+<p>主要解释损失函数的含义 <span
+class="math inline">\(C_{\alpha}(T)=\sum_{t=1}^{\|T\|} N_{t}
+H_{t}(T)+\alpha\|T\|\)</span></p>
+<h4 id="ct"><span class="math inline">\(C(T)\)</span></h4>
+<p>通常把第一项用<code>C(T)</code>表示来简化、表达式变成<span
+class="math inline">\(C_{\alpha}(T) = C(T) + \alpha\|T\|\)</span> <span
+class="math inline">\(C(T) = \sum_{t=1}^{\|T\|} N_{t} H_{t}(T)\)</span>
+含义：树中所有叶子节点的信息熵之和。表示模型对训练数据的<strong>预测误差</strong>，即模型与训练数据的<strong>拟合程度</strong></p>
+<h4 id="alphat"><span class="math inline">\(\alpha\|T\|\)</span></h4>
+<p>含义：<span
+class="math inline">\(|T|\)</span>表示模型的复杂度(节点越多当然越复杂)。从公式<span
+class="math inline">\(C(T) = \sum_{t=1}^{\|T\|} N_{t}
+H_{t}(T)\)</span>中可以看出来，一个树的叶结点越多，即模型越复杂， <span
+class="math inline">\(C(T)\)</span>
+就越小。极端情况如每一个实例样本点都对应一个叶结点，我们知道此时一般是过拟合的，此时模型对训练数据完全正确分类，
+<span class="math inline">\(C(T)=0\)</span>
+；相反如果叶结点较少，即模型较为简单时， <span
+class="math inline">\(C(T)\)</span>就越大。极端情况如只有一个叶结点，这个叶结点包含了所有的实例样本点，此时
+<span class="math inline">\(\frac{N_{tk}}{N_t}\)</span>
+相对较小(可能远小于1，接近于0)， <span
+class="math inline">\(log{\frac{N_{tk}}{N_t}}\)</span>
+就非常大。所以就有了一个<strong>平衡机制</strong>在里面
+<strong>通过<span class="math inline">\(\alpha\)</span>来影响权衡<span
+class="math inline">\(C(T)和|T|\)</span>的关系</strong></p>
+<h3 id="剪枝算法">剪枝算法</h3>
+<p>输入：生成算法产生的整个树T，参数 <span
+class="math inline">\(\alpha\)</span> 输出：修剪后的子树<span
+class="math inline">\(T_{\alpha}\)</span> 1.
+计算<strong>每个结点的经验熵</strong>。 2. 递归地从树的叶结点向上回缩。
+<span class="math inline">\(C_{\alpha}(T_{\text{修剪后}}) \le
+C_{\alpha}(T_{\text{修剪前}})\)</span> 则进行剪枝 3.
+返回2，直至不能继续为止，得到损失函数最小的子树<span
+class="math inline">\(T_{\alpha}\)</span> <img
+src="https://catbed.oss-cn-chengdu.aliyuncs.com/img/202204092045875.png"
+alt="202204092045875|400" /></p>
 
     </div>
 
@@ -354,7 +394,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91%E7%9A%84%E5%89%AA%E6%9E%9D"><span class="nav-number">1.</span> <span class="nav-text">决策树的剪枝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-T"><span class="nav-number">1.2.1.</span> <span class="nav-text">$C(T)$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#alpha-T"><span class="nav-number">1.2.2.</span> <span class="nav-text">$\alpha|T|$</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AA%E6%9E%9D%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">剪枝算法</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91%E7%9A%84%E5%89%AA%E6%9E%9D"><span class="nav-number">1.</span> <span class="nav-text">决策树的剪枝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ct"><span class="nav-number">1.2.1.</span> <span class="nav-text">\(C(T)\)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#alphat"><span class="nav-number">1.2.2.</span> <span class="nav-text">\(\alpha\|T\|\)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%AA%E6%9E%9D%E7%AE%97%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">剪枝算法</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -465,6 +505,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
